@@ -129,6 +129,161 @@
     }
     @keyframes slideIn { to { transform: translateX(0); } }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* === GAMING SPLASH SCREEN === */
+    #splash-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #0a0a0a;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      overflow: hidden;
+    }
+    #splash-screen .splash-title {
+      font-size: 3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      color: #fff;
+      text-shadow: 0 0 10px #8000ff, 0 0 40px #8000ff, 0 0 80px #8000ff;
+      animation: glitchText 0.3s infinite alternate;
+      position: relative;
+    }
+    #splash-screen .splash-subtitle {
+      font-size: 1rem;
+      color: #aaa;
+      letter-spacing: 4px;
+      margin-top: 10px;
+      opacity: 0;
+      animation: subtitleFade 0.8s 0.5s forwards;
+    }
+    #splash-screen .loading-bar-container {
+      width: 300px;
+      height: 4px;
+      background: #222;
+      border-radius: 4px;
+      margin-top: 30px;
+      overflow: hidden;
+    }
+    #splash-screen .loading-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #8000ff, #b366ff, #8000ff);
+      border-radius: 4px;
+      animation: loadBar 2s ease forwards;
+      box-shadow: 0 0 10px #8000ff;
+    }
+    .splash-scanline {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.015) 2px,
+        rgba(255,255,255,0.015) 4px
+      );
+      pointer-events: none;
+    }
+    @keyframes glitchText {
+      0% { text-shadow: 0 0 10px #8000ff, 0 0 40px #8000ff, 0 0 80px #8000ff; transform: translate(0); }
+      25% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(-1px, 1px); }
+      50% { text-shadow: 0 0 10px #8000ff, 0 0 40px #8000ff; transform: translate(1px, -1px); }
+      75% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(-1px, 0); }
+      100% { text-shadow: 0 0 10px #8000ff, 0 0 40px #8000ff, 0 0 80px #8000ff; transform: translate(0); }
+    }
+    @keyframes subtitleFade { to { opacity: 1; } }
+    @keyframes loadBar { to { width: 100%; } }
+
+    /* === PARTICLE CANVAS === */
+    #particle-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* === NEON GLOW ENHANCEMENTS === */
+    .sidebar a {
+      position: relative;
+      overflow: hidden;
+    }
+    .sidebar a::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 3px; height: 100%;
+      background: #8000ff;
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+    .sidebar a:hover::before {
+      transform: scaleY(1);
+    }
+    .sidebar a:hover {
+      text-shadow: 0 0 8px rgba(128, 0, 255, 0.5);
+    }
+
+    .game-card {
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+      border: 1px solid transparent;
+    }
+    .game-card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 20px #8000ff, 0 0 40px rgba(128, 0, 255, 0.3);
+      border: 1px solid rgba(128, 0, 255, 0.4);
+    }
+
+    /* Animated section headers */
+    .main-content h2 {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+    }
+    .main-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, #8000ff, transparent);
+      animation: headlineGrow 1s ease forwards;
+    }
+    @keyframes headlineGrow { to { width: 100%; } }
+
+    /* Dashboard enter animation */
+    .main-app-enter .sidebar { animation: slideIn 0.6s ease forwards; }
+    .main-app-enter .main-content { animation: fadeSlideUp 0.8s 0.2s ease both; }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Pulsing glow on the WarpX title in sidebar */
+    .sidebar-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow: 0 0 10px #8000ff, 0 0 30px rgba(128,0,255,0.4);
+      animation: titlePulse 2s ease-in-out infinite;
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+    @keyframes titlePulse {
+      0%, 100% { text-shadow: 0 0 10px #8000ff, 0 0 30px rgba(128,0,255,0.4); }
+      50% { text-shadow: 0 0 20px #a040ff, 0 0 50px rgba(128,0,255,0.7); }
+    }
     /* Discord Card Styles */
 .discord-card {
   background: #1e1e1e;
@@ -231,9 +386,285 @@
   max-width: 280px;
 }
 
+/* === ULTRA GAMING INTENSITY === */
+body {
+  background: linear-gradient(135deg, #0a0a0a, #0d001a, #0a0a0a, #0a001a);
+  background-size: 400% 400%;
+  animation: bgShift 20s ease infinite;
+}
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.sidebar {
+  border-right: 2px solid #8000ff22;
+  background: linear-gradient(180deg, #1a1a1a, #12001a, #1a1a1a);
+}
+.game-card:hover {
+  animation: rgbGlow 1.5s linear infinite;
+  transform: scale(1.08) translateY(-5px) !important;
+}
+@keyframes rgbGlow {
+  0% { box-shadow: 0 0 20px #8000ff, 0 0 40px rgba(128,0,255,0.4); border-color: #8000ff55; }
+  33% { box-shadow: 0 0 20px #ff0080, 0 0 40px rgba(255,0,128,0.4); border-color: #ff008055; }
+  66% { box-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0,255,255,0.4); border-color: #00ffff55; }
+  100% { box-shadow: 0 0 20px #8000ff, 0 0 40px rgba(128,0,255,0.4); border-color: #8000ff55; }
+}
+.main-content h2 {
+  font-size: 1.3rem !important;
+  background: linear-gradient(90deg, #8000ff, #ff0080, #b366ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 35px;
+}
+.main-content h2::after {
+  height: 3px !important;
+  background: linear-gradient(90deg, #8000ff, #ff0080, transparent) !important;
+  box-shadow: 0 0 10px #8000ff;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8000ff, #ff0080); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a040ff; }
+.game-card { animation: breathe 3s ease-in-out infinite; cursor: pointer; }
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 8px rgba(128,0,255,0.15); }
+  50% { box-shadow: 0 0 18px rgba(128,0,255,0.35); }
+}
+.game-card img { transition: transform 0.3s ease; }
+.game-card:hover img { transform: scale(1.1) rotate(2deg); }
+.sidebar a { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+.sidebar-divider { height: 1px; background: linear-gradient(90deg, transparent, #8000ff44, transparent); margin: 5px 0; }
+footer { text-align: center; padding: 30px; color: #555; font-size: 0.85rem; border-top: 1px solid #222; margin-top: 40px; }
+
+/* === SEARCH BAR === */
+.search-container {
+  position: relative; margin-bottom: 25px; max-width: 500px;
+}
+.search-container input {
+  width: 100%; padding: 12px 16px 12px 42px; border-radius: 12px;
+  border: 1px solid #333; background: #1a1a1a; color: #fff;
+  font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s;
+}
+.search-container input:focus {
+  border-color: #8000ff; outline: none; box-shadow: 0 0 12px rgba(128,0,255,0.3);
+}
+.search-container .search-icon {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 1rem; color: #666; pointer-events: none;
+}
+.search-no-results {
+  display: none; color: #888; text-align: center; padding: 40px; font-size: 1.1rem;
+}
+
+/* === PLAY TIMER === */
+.play-timer {
+  position: fixed; bottom: 16px; right: 16px; background: #1a1a1af0;
+  border: 1px solid #8000ff44; border-radius: 12px; padding: 10px 16px;
+  font-size: 0.85rem; color: #aaa; z-index: 9000; display: none;
+  backdrop-filter: blur(8px); box-shadow: 0 0 15px rgba(128,0,255,0.15);
+}
+.play-timer .timer-value { color: #b366ff; font-weight: bold; font-variant-numeric: tabular-nums; }
+.play-timer .timer-label { margin-right: 6px; }
+
+/* === RECENTLY PLAYED === */
+.recently-played-section { display: none; }
+
+/* === TRENDING BADGE === */
+.trending-badge {
+  position: absolute; top: 8px; left: 8px; background: linear-gradient(90deg, #ff4500, #ff8c00);
+  color: #fff; font-size: 0.6rem; font-weight: 900; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px; z-index: 3; letter-spacing: 0.5px;
+  animation: flamePulse 1.5s ease-in-out infinite;
+}
+@keyframes flamePulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(255,69,0,0.4); }
+  50% { box-shadow: 0 0 14px rgba(255,69,0,0.8); }
+}
+.popular-badge {
+  position: absolute; top: 8px; left: 8px; background: linear-gradient(90deg, #8000ff, #b366ff);
+  color: #fff; font-size: 0.6rem; font-weight: 900; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 4px; z-index: 3; letter-spacing: 0.5px;
+}
+
+/* Light mode additions */
+body.light-mode .search-container input { background: #fff !important; border-color: #ccc !important; color: #111 !important; }
+body.light-mode .play-timer { background: #ffffffe0 !important; border-color: #ddd !important; color: #555 !important; }
+body.light-mode .play-timer .timer-value { color: #8000ff !important; }
+
+/* === AVATAR === */
+.sidebar-profile { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
+.sidebar-avatar {
+  width: 60px; height: 60px; border-radius: 50%; border: 2px solid #8000ff;
+  cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; object-fit: cover;
+  box-shadow: 0 0 12px rgba(128,0,255,0.3);
+}
+.sidebar-avatar:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(128,0,255,0.6); }
+.sidebar-username {
+  margin-top: 6px; font-size: 0.8rem; color: #b366ff; font-weight: 600;
+  max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center;
+}
+
+/* Avatar Picker Overlay */
+.avatar-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75); display: none; justify-content: center;
+  align-items: center; z-index: 10001; backdrop-filter: blur(6px);
+}
+.avatar-picker {
+  background: #1a1a1a; border-radius: 16px; padding: 30px; width: 380px; max-width: 92%;
+  box-shadow: 0 0 40px rgba(128,0,255,0.3); border: 1px solid #8000ff33;
+  animation: fadeIn 0.3s ease; text-align: center;
+}
+.avatar-picker h2 {
+  margin: 0 0 20px; background: linear-gradient(90deg, #8000ff, #ff0080);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.avatar-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 15px;
+}
+.avatar-option {
+  width: 64px; height: 64px; border-radius: 50%; cursor: pointer;
+  border: 3px solid transparent; transition: all 0.3s; margin: 0 auto;
+  font-size: 2.5rem; display: flex; align-items: center; justify-content: center;
+  background: #222;
+}
+.avatar-option:hover { border-color: #8000ff; transform: scale(1.1); box-shadow: 0 0 15px rgba(128,0,255,0.4); }
+.avatar-option.selected { border-color: #ff0080; box-shadow: 0 0 20px rgba(255,0,128,0.5); }
+.avatar-picker .close-btn {
+  position: absolute; right: 16px; top: 10px; font-size: 24px; color: #888;
+  cursor: pointer; transition: color 0.3s;
+}
+.avatar-picker .close-btn:hover { color: #fff; }
+
+/* === NEWS SECTION === */
+.news-section {
+  background: #1a1a1a; border-radius: 14px; padding: 22px 26px; margin-bottom: 30px;
+  border: 1px solid #8000ff22; box-shadow: 0 0 15px rgba(128,0,255,0.08);
+}
+.news-section h2 { margin-top: 0 !important; }
+.news-item {
+  padding: 14px 0; border-bottom: 1px solid #222; display: flex; gap: 14px; align-items: flex-start;
+}
+.news-item:last-child { border-bottom: none; }
+.news-icon {
+  font-size: 1.5rem; min-width: 36px; height: 36px; display: flex;
+  align-items: center; justify-content: center; background: #8000ff18;
+  border-radius: 8px; flex-shrink: 0;
+}
+.news-body h4 { margin: 0 0 4px; color: #ddd; font-size: 0.95rem; }
+.news-body p { margin: 0; color: #888; font-size: 0.82rem; line-height: 1.4; }
+.news-body .news-date { color: #666; font-size: 0.72rem; margin-top: 4px; }
+.news-badge {
+  display: inline-block; background: #ff0080; color: #fff; font-size: 0.6rem;
+  padding: 1px 6px; border-radius: 4px; font-weight: 700; margin-left: 8px; vertical-align: middle;
+}
+
+/* Light mode news & avatar */
+body.light-mode .news-section { background: #fff !important; border-color: #ddd !important; }
+body.light-mode .news-body h4 { color: #222 !important; }
+body.light-mode .news-body p { color: #666 !important; }
+body.light-mode .news-item { border-color: #eee !important; }
+body.light-mode .avatar-picker { background: #fff !important; border-color: #ddd !important; }
+body.light-mode .avatar-option { background: #f0f0f5 !important; }
+body.light-mode .sidebar-username { color: #8000ff !important; }
+
+/* === SETTINGS PANEL === */
+.settings-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75); display: none; justify-content: center;
+  align-items: center; z-index: 10000; backdrop-filter: blur(6px);
+}
+.settings-panel {
+  background: #1a1a1a; border-radius: 16px; padding: 35px; width: 400px; max-width: 92%;
+  max-height: 85vh; overflow-y: auto; position: relative;
+  box-shadow: 0 0 40px rgba(128,0,255,0.3); border: 1px solid #8000ff33;
+  animation: fadeIn 0.3s ease;
+}
+.settings-close {
+  position: absolute; top: 12px; right: 18px; font-size: 26px; color: #888;
+  cursor: pointer; transition: color 0.3s;
+}
+.settings-close:hover { color: #fff; }
+.settings-title {
+  margin: 0 0 25px 0; font-size: 1.4rem; text-align: center;
+  background: linear-gradient(90deg, #8000ff, #ff0080); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.settings-section { margin-bottom: 25px; }
+.settings-section h3 {
+  font-size: 1rem; color: #b366ff; margin-bottom: 12px;
+  border-bottom: 1px solid #333; padding-bottom: 6px;
+}
+.settings-section label { display: block; color: #aaa; font-size: 0.85rem; margin: 10px 0 4px; }
+.settings-section input {
+  width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #333;
+  background: #222; color: #fff; font-size: 0.95rem; box-sizing: border-box;
+}
+.settings-section input:focus { border-color: #8000ff; outline: none; box-shadow: 0 0 8px rgba(128,0,255,0.3); }
+.settings-save-btn {
+  margin-top: 14px; background: linear-gradient(90deg, #8000ff, #ff0080); border: none;
+  padding: 10px; width: 100%; border-radius: 8px; color: #fff; font-weight: bold;
+  cursor: pointer; font-size: 0.95rem; transition: opacity 0.3s;
+}
+.settings-save-btn:hover { opacity: 0.85; }
+
+/* Theme toggle switch */
+.theme-toggle-row { display: flex; align-items: center; justify-content: space-between; }
+.toggle-switch { position: relative; width: 50px; height: 26px; display: inline-block; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #333;
+  border-radius: 26px; cursor: pointer; transition: 0.3s;
+}
+.toggle-slider::before {
+  content: ''; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 3px;
+  background: #8000ff; border-radius: 50%; transition: 0.3s;
+}
+.toggle-switch input:checked + .toggle-slider { background: #b366ff; }
+.toggle-switch input:checked + .toggle-slider::before { transform: translateX(24px); background: #fff; }
+
+/* === LIGHT MODE THEME === */
+body.light-mode { background: #f0f0f5 !important; color: #111 !important; }
+body.light-mode .sidebar { background: #e8e8ec !important; box-shadow: 2px 0 10px rgba(0,0,0,0.08) !important; }
+body.light-mode .sidebar a { color: #333 !important; }
+body.light-mode .sidebar a:hover { background: #8000ff !important; color: #fff !important; }
+body.light-mode .sidebar-title { color: #222 !important; text-shadow: none !important; }
+body.light-mode .game-card { background: #fff !important; border: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important; }
+body.light-mode .game-card p { color: #333 !important; }
+body.light-mode .game-card:hover { box-shadow: 0 0 20px rgba(128,0,255,0.3) !important; border-color: #8000ff55 !important; }
+body.light-mode .main-content h2 { -webkit-text-fill-color: #333 !important; background: none !important; }
+body.light-mode .main-content h2::after { background: linear-gradient(90deg, #8000ff, transparent) !important; }
+body.light-mode .login-box { background: #fff !important; box-shadow: 0 2px 20px rgba(0,0,0,0.1) !important; }
+body.light-mode input { background: #f0f0f5 !important; color: #111 !important; border: 1px solid #ccc !important; }
+body.light-mode .settings-panel { background: #fff !important; border-color: #ddd !important; }
+body.light-mode .settings-section h3 { color: #8000ff !important; border-color: #eee !important; }
+body.light-mode .settings-section input { background: #f5f5f5 !important; color: #111 !important; border-color: #ccc !important; }
+body.light-mode .discord-card { background: #fff !important; }
+body.light-mode .discord-heading { color: #222 !important; }
+body.light-mode .discord-description { color: #666 !important; }
+body.light-mode .custom-alert { background: #fff !important; color: #111 !important; }
+body.light-mode footer { color: #999 !important; border-color: #ddd !important; }
+body.light-mode .sidebar-divider { background: linear-gradient(90deg, transparent, #8000ff22, transparent) !important; }
+
   </style>
 </head>
 <body>
+
+<!-- Splash Screen -->
+<div id="splash-screen">
+  <div class="splash-scanline"></div>
+  <div class="splash-title">WARPX GAMING</div>
+  <div class="splash-subtitle">INITIALIZING PLAYER SESSION...</div>
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
+</div>
+
+<!-- Particle Background -->
+<canvas id="particle-canvas"></canvas>
 
 <!-- Login Section -->
 <div class="center" id="login-section">
@@ -248,13 +679,89 @@
 <!-- Main App -->
 <div id="main-app" style="display: none;">
   <div class="sidebar">
-    <a href="#" onclick="showCategory('action')">Action Games</a>
-    <a href="#" onclick="showCategory('racing')">Racing</a>
-    <a href="#" onclick="showFavorites()">Favorites</a>
-    <a href="#" onclick="logout()" style="color:red;">Logout</a>
+    <div class="sidebar-title">⚡ WarpX</div>
+    <div class="sidebar-profile">
+      <img id="sidebar-avatar" class="sidebar-avatar" src="" alt="Avatar" onclick="openAvatarPicker()" title="Change Avatar" />
+      <div class="sidebar-username" id="sidebar-username"></div>
+    </div>
+    <a href="#" onclick="showCategory('all')">🎮 All Games</a>
+    <a href="#" onclick="showCategory('featured')">⭐ Featured</a>
+    <a href="#" onclick="showCategory('action')">🔫 Shooting</a>
+    <a href="#" onclick="showCategory('racing')">🏎️ Racing</a>
+    <a href="#" onclick="showCategory('blocks')">🧱 Blocks</a>
+    <div class="sidebar-divider"></div>
+    <a href="#" onclick="showCategory('battle-royale')">🏆 Battle Royale</a>
+    <a href="#" onclick="showCategory('io')">🌐 .io Games</a>
+    <a href="#" onclick="showCategory('puzzle')">🧩 Puzzle & Brain</a>
+    <a href="#" onclick="showCategory('sports')">⚽ Sports</a>
+    <a href="#" onclick="showCategory('adventure')">🗺️ Adventure</a>
+    <a href="#" onclick="showCategory('arcade')">👾 Arcade</a>
+    <a href="#" onclick="showCategory('survival')">🧟 Survival</a>
+    <div class="sidebar-divider"></div>
+    <a href="#" onclick="showFavorites()">💛 Favorites</a>
+    <a href="#" onclick="openSettings()">⚙️ Settings</a>
+    <a href="#" onclick="logout()" style="color:red;">🚪 Logout</a>
   </div>
 
   <div class="main-content" id="main-content">
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="game-search" placeholder="Search games..." oninput="searchGames()" autocomplete="off" />
+    </div>
+
+    <!-- News Section -->
+    <div class="news-section" id="news-section">
+      <h2>📰 What's New</h2>
+      <div class="news-item">
+        <div class="news-icon">🚀</div>
+        <div class="news-body">
+          <h4>Massive Update — 50+ New Games Added! <span class="news-badge">NEW</span></h4>
+          <p>Battle Royale, .io Classics, Puzzle, Sports, Adventure, Arcade & Survival categories are now live with tons of new titles.</p>
+          <div class="news-date">April 11, 2026</div>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-icon">🎨</div>
+        <div class="news-body">
+          <h4>Custom Avatars Are Here!</h4>
+          <p>Click your profile picture in the sidebar to pick from 16 gaming avatars. Express yourself!</p>
+          <div class="news-date">April 11, 2026</div>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-icon">🔍</div>
+        <div class="news-body">
+          <h4>Search & Play Timer</h4>
+          <p>Use the new search bar to find any game instantly. Your session playtime is now tracked in the bottom-right corner.</p>
+          <div class="news-date">April 10, 2026</div>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-icon">🌙</div>
+        <div class="news-body">
+          <h4>Dark & Light Mode</h4>
+          <p>Switch between dark and light themes in Settings. Your preference is saved automatically.</p>
+          <div class="news-date">April 9, 2026</div>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-icon">🎮</div>
+        <div class="news-body">
+          <h4>WarpX Gaming Launched!</h4>
+          <p>Welcome to WarpXgaming-Studios! Your one-stop destination for the best browser games. More updates coming soon.</p>
+          <div class="news-date">April 8, 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recently Played -->
+    <div class="recently-played-section" id="recently-played-section">
+      <h2>🕐 Recently Played</h2>
+      <div class="game-list" id="recently-played-list"></div>
+    </div>
+
     <h2>Featured Games</h2>
     <div class="game-list">
       <div class="game-card" onclick="openGame('https://www.roblox.com')">
@@ -512,6 +1019,294 @@
       </div>
     </div>
 
+    <h2 id="cat-battle-royale">Battle Royale</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://surviv.io/')">
+        <span class="favorite-star" data-gameid="survivio" onclick="event.stopPropagation(); toggleFavorite(this, 'survivio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=surviv.io&sz=128" alt="Surviv.io" />
+        <p>Surviv.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://zombsroyale.io/')">
+        <span class="favorite-star" data-gameid="zombsroyale" onclick="event.stopPropagation(); toggleFavorite(this, 'zombsroyale')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=zombsroyale.io&sz=128" alt="ZombsRoyale.io" />
+        <p>ZombsRoyale.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://buildroyale.io/')">
+        <span class="favorite-star" data-gameid="buildroyale" onclick="event.stopPropagation(); toggleFavorite(this, 'buildroyale')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=buildroyale.io&sz=128" alt="BuildRoyale.io" />
+        <p>BuildRoyale.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://1v1.lol/')">
+        <span class="favorite-star" data-gameid="1v1lol" onclick="event.stopPropagation(); toggleFavorite(this, '1v1lol')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=1v1.lol&sz=128" alt="1v1.LOL" />
+        <p>1v1.LOL</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://zombs.io/')">
+        <span class="favorite-star" data-gameid="zombsio" onclick="event.stopPropagation(); toggleFavorite(this, 'zombsio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=zombs.io&sz=128" alt="Zombs.io" />
+        <p>Zombs.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://taming.io/')">
+        <span class="favorite-star" data-gameid="tamingio" onclick="event.stopPropagation(); toggleFavorite(this, 'tamingio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=taming.io&sz=128" alt="Taming.io" />
+        <p>Taming.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://krew.io/')">
+        <span class="favorite-star" data-gameid="krewio" onclick="event.stopPropagation(); toggleFavorite(this, 'krewio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=krew.io&sz=128" alt="Krew.io" />
+        <p>Krew.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://bruh.io/')">
+        <span class="favorite-star" data-gameid="bruhio" onclick="event.stopPropagation(); toggleFavorite(this, 'bruhio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=bruh.io&sz=128" alt="Bruh.io" />
+        <p>Bruh.io</p>
+      </div>
+    </div>
+
+    <h2 id="cat-io">Classic .io Games</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://agar.io/')">
+        <span class="favorite-star" data-gameid="agario" onclick="event.stopPropagation(); toggleFavorite(this, 'agario')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=agar.io&sz=128" alt="Agar.io" />
+        <p>Agar.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://slither.io/')">
+        <span class="favorite-star" data-gameid="slitherio" onclick="event.stopPropagation(); toggleFavorite(this, 'slitherio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=slither.io&sz=128" alt="Slither.io" />
+        <p>Slither.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://diep.io/')">
+        <span class="favorite-star" data-gameid="diepio" onclick="event.stopPropagation(); toggleFavorite(this, 'diepio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=diep.io&sz=128" alt="Diep.io" />
+        <p>Diep.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://paper-io.com/')">
+        <span class="favorite-star" data-gameid="paperio" onclick="event.stopPropagation(); toggleFavorite(this, 'paperio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=paper-io.com&sz=128" alt="Paper.io" />
+        <p>Paper.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://wormate.io/')">
+        <span class="favorite-star" data-gameid="wormateio" onclick="event.stopPropagation(); toggleFavorite(this, 'wormateio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=wormate.io&sz=128" alt="Wormate.io" />
+        <p>Wormate.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://skribbl.io/')">
+        <span class="favorite-star" data-gameid="skribblio" onclick="event.stopPropagation(); toggleFavorite(this, 'skribblio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=skribbl.io&sz=128" alt="Skribbl.io" />
+        <p>Skribbl.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://splix.io/')">
+        <span class="favorite-star" data-gameid="splixio" onclick="event.stopPropagation(); toggleFavorite(this, 'splixio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=splix.io&sz=128" alt="Splix.io" />
+        <p>Splix.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://hole-io.com/')">
+        <span class="favorite-star" data-gameid="holeio" onclick="event.stopPropagation(); toggleFavorite(this, 'holeio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=hole-io.com&sz=128" alt="Hole.io" />
+        <p>Hole.io</p>
+      </div>
+    </div>
+
+    <h2 id="cat-puzzle">Puzzle & Brain</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://play2048.co/')">
+        <span class="favorite-star" data-gameid="2048" onclick="event.stopPropagation(); toggleFavorite(this, '2048')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=play2048.co&sz=128" alt="2048" />
+        <p>2048</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.chess.com/play')">
+        <span class="favorite-star" data-gameid="chess" onclick="event.stopPropagation(); toggleFavorite(this, 'chess')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=chess.com&sz=128" alt="Chess" />
+        <p>Chess</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.nytimes.com/games/wordle')">
+        <span class="favorite-star" data-gameid="wordle" onclick="event.stopPropagation(); toggleFavorite(this, 'wordle')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=nytimes.com&sz=128" alt="Wordle" />
+        <p>Wordle</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://minesweeper.online/')">
+        <span class="favorite-star" data-gameid="minesweeper" onclick="event.stopPropagation(); toggleFavorite(this, 'minesweeper')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=minesweeper.online&sz=128" alt="Minesweeper" />
+        <p>Minesweeper</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://sudoku.com/')">
+        <span class="favorite-star" data-gameid="sudoku" onclick="event.stopPropagation(); toggleFavorite(this, 'sudoku')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=sudoku.com&sz=128" alt="Sudoku" />
+        <p>Sudoku</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://papergames.io/en/connect4')">
+        <span class="favorite-star" data-gameid="connect4" onclick="event.stopPropagation(); toggleFavorite(this, 'connect4')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=papergames.io&sz=128" alt="Connect 4" />
+        <p>Connect 4</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.mahjong.com/')">
+        <span class="favorite-star" data-gameid="mahjong" onclick="event.stopPropagation(); toggleFavorite(this, 'mahjong')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=mahjong.com&sz=128" alt="Mahjong" />
+        <p>Mahjong</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.nytimes.com/crosswords')">
+        <span class="favorite-star" data-gameid="crossword" onclick="event.stopPropagation(); toggleFavorite(this, 'crossword')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=nytimes.com&sz=128" alt="Crossword" />
+        <p>Crossword</p>
+      </div>
+    </div>
+
+    <h2 id="cat-sports">Sports Games</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://basketballstars.io/')">
+        <span class="favorite-star" data-gameid="bballstars" onclick="event.stopPropagation(); toggleFavorite(this, 'bballstars')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=basketballstars.io&sz=128" alt="Basketball Stars" />
+        <p>Basketball Stars</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://www.haxball.com/')">
+        <span class="favorite-star" data-gameid="haxball" onclick="event.stopPropagation(); toggleFavorite(this, 'haxball')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=haxball.com&sz=128" alt="HaxBall" />
+        <p>HaxBall</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://retrobowl.org/')">
+        <span class="favorite-star" data-gameid="retrobowl" onclick="event.stopPropagation(); toggleFavorite(this, 'retrobowl')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=retrobowl.org&sz=128" alt="Retro Bowl" />
+        <p>Retro Bowl</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/soccer-random')">
+        <span class="favorite-star" data-gameid="soccerrandom" onclick="event.stopPropagation(); toggleFavorite(this, 'soccerrandom')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Soccer Random" />
+        <p>Soccer Random</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/football-legends-2021')">
+        <span class="favorite-star" data-gameid="footballlegends" onclick="event.stopPropagation(); toggleFavorite(this, 'footballlegends')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Football Legends" />
+        <p>Football Legends</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/boxing-random')">
+        <span class="favorite-star" data-gameid="boxingrandom" onclick="event.stopPropagation(); toggleFavorite(this, 'boxingrandom')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Boxing Random" />
+        <p>Boxing Random</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/badminton-clash')">
+        <span class="favorite-star" data-gameid="badminton" onclick="event.stopPropagation(); toggleFavorite(this, 'badminton')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Badminton Clash" />
+        <p>Badminton Clash</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/baseball-9')">
+        <span class="favorite-star" data-gameid="baseball9" onclick="event.stopPropagation(); toggleFavorite(this, 'baseball9')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Baseball 9" />
+        <p>Baseball 9</p>
+      </div>
+    </div>
+
+    <h2 id="cat-adventure">Adventure & RPG</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://deeeep.io/')">
+        <span class="favorite-star" data-gameid="deeepio" onclick="event.stopPropagation(); toggleFavorite(this, 'deeepio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=deeeep.io&sz=128" alt="Deeeep.io" />
+        <p>Deeeep.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://territorial.io/')">
+        <span class="favorite-star" data-gameid="territorialio" onclick="event.stopPropagation(); toggleFavorite(this, 'territorialio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=territorial.io&sz=128" alt="Territorial.io" />
+        <p>Territorial.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://bonk.io/')">
+        <span class="favorite-star" data-gameid="bonkio" onclick="event.stopPropagation(); toggleFavorite(this, 'bonkio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=bonk.io&sz=128" alt="Bonk.io" />
+        <p>Bonk.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://narrow.one/')">
+        <span class="favorite-star" data-gameid="narrowone" onclick="event.stopPropagation(); toggleFavorite(this, 'narrowone')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=narrow.one&sz=128" alt="Narrow.one" />
+        <p>Narrow.one</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://littlebigsnake.com/')">
+        <span class="favorite-star" data-gameid="littlebigsnake" onclick="event.stopPropagation(); toggleFavorite(this, 'littlebigsnake')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=littlebigsnake.com&sz=128" alt="Little Big Snake" />
+        <p>Little Big Snake</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://flyordie.io/')">
+        <span class="favorite-star" data-gameid="flyordieio" onclick="event.stopPropagation(); toggleFavorite(this, 'flyordieio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=flyordie.io&sz=128" alt="Flyordie.io" />
+        <p>Flyordie.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://betrayal.io/')">
+        <span class="favorite-star" data-gameid="betrayalio" onclick="event.stopPropagation(); toggleFavorite(this, 'betrayalio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=betrayal.io&sz=128" alt="Betrayal.io" />
+        <p>Betrayal.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://creatur.io/')">
+        <span class="favorite-star" data-gameid="creaturio" onclick="event.stopPropagation(); toggleFavorite(this, 'creaturio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=creatur.io&sz=128" alt="Creatur.io" />
+        <p>Creatur.io</p>
+      </div>
+    </div>
+
+    <h2 id="cat-arcade">Arcade & Retro</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://slopegame.com/')">
+        <span class="favorite-star" data-gameid="slope" onclick="event.stopPropagation(); toggleFavorite(this, 'slope')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=slopegame.com&sz=128" alt="Slope" />
+        <p>Slope</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://run3.co/')">
+        <span class="favorite-star" data-gameid="run3" onclick="event.stopPropagation(); toggleFavorite(this, 'run3')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=run3.co&sz=128" alt="Run 3" />
+        <p>Run 3</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://geometrydash.io/')">
+        <span class="favorite-star" data-gameid="geodash" onclick="event.stopPropagation(); toggleFavorite(this, 'geodash')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=geometrydash.io&sz=128" alt="Geometry Dash" />
+        <p>Geometry Dash</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://drifthunters.com/')">
+        <span class="favorite-star" data-gameid="drifthunters" onclick="event.stopPropagation(); toggleFavorite(this, 'drifthunters')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=drifthunters.com&sz=128" alt="Drift Hunters" />
+        <p>Drift Hunters</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://tunnelrush.io/')">
+        <span class="favorite-star" data-gameid="tunnelrush" onclick="event.stopPropagation(); toggleFavorite(this, 'tunnelrush')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=tunnelrush.io&sz=128" alt="Tunnel Rush" />
+        <p>Tunnel Rush</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/subway-surfers')">
+        <span class="favorite-star" data-gameid="subwaysurfers" onclick="event.stopPropagation(); toggleFavorite(this, 'subwaysurfers')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Subway Surfers" />
+        <p>Subway Surfers</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/temple-run-2')">
+        <span class="favorite-star" data-gameid="templerun2" onclick="event.stopPropagation(); toggleFavorite(this, 'templerun2')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Temple Run 2" />
+        <p>Temple Run 2</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/crossy-road')">
+        <span class="favorite-star" data-gameid="crossyroad" onclick="event.stopPropagation(); toggleFavorite(this, 'crossyroad')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Crossy Road" />
+        <p>Crossy Road</p>
+      </div>
+    </div>
+
+    <h2 id="cat-survival">Survival Games</h2>
+    <div class="game-list">
+      <div class="game-card" onclick="openGame('https://starve.io/')">
+        <span class="favorite-star" data-gameid="starveio" onclick="event.stopPropagation(); toggleFavorite(this, 'starveio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=starve.io&sz=128" alt="Starve.io" />
+        <p>Starve.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://devast.io/')">
+        <span class="favorite-star" data-gameid="devastio" onclick="event.stopPropagation(); toggleFavorite(this, 'devastio')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=devast.io&sz=128" alt="Devast.io" />
+        <p>Devast.io</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://poki.com/en/g/zombotron')">
+        <span class="favorite-star" data-gameid="zombotron" onclick="event.stopPropagation(); toggleFavorite(this, 'zombotron')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=poki.com&sz=128" alt="Zombotron" />
+        <p>Zombotron</p>
+      </div>
+      <div class="game-card" onclick="openGame('https://nightwalkers.io/')">
+        <span class="favorite-star" data-gameid="nightwalkers" onclick="event.stopPropagation(); toggleFavorite(this, 'nightwalkers')">★</span>
+        <img src="https://www.google.com/s2/favicons?domain=nightwalkers.io&sz=128" alt="Nightwalkers.io" />
+        <p>Nightwalkers.io</p>
+      </div>
+    </div>
+
 
 <h2>Disclaimer</h2>
     <p>Some of the games here are not made by us. They are showcased for entertainment and discovery.if you are a copyright holder and wish to request changes, please contact us.</p></p>
@@ -536,7 +1331,50 @@
     </div>
         <!-- End Discord Section --> 
           </div>
-         
+
+<!-- Avatar Picker -->
+<div id="avatar-overlay" class="avatar-overlay">
+  <div class="avatar-picker" style="position:relative;">
+    <span class="close-btn" onclick="closeAvatarPicker()">&times;</span>
+    <h2>Choose Your Avatar</h2>
+    <div class="avatar-grid" id="avatar-grid"></div>
+    <button class="settings-save-btn" onclick="saveAvatar()">Save Avatar</button>
+  </div>
+</div>
+
+<!-- Play Timer -->
+<div class="play-timer" id="play-timer">
+  <span class="timer-label">⏱️ Session:</span>
+  <span class="timer-value" id="play-timer-value">00:00</span>
+</div>
+
+<!-- Settings Panel -->
+<div id="settings-overlay" class="settings-overlay">
+  <div class="settings-panel">
+    <span class="settings-close" onclick="closeSettings()">&times;</span>
+    <h2 class="settings-title">⚙️ Settings</h2>
+
+    <div class="settings-section">
+      <h3>Account Info</h3>
+      <label>Email</label>
+      <input type="email" id="settings-email" placeholder="New email" />
+      <label>Password</label>
+      <input type="password" id="settings-password" placeholder="New password" />
+      <button class="settings-save-btn" onclick="saveAccountSettings()">Save Changes</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>Theme</h3>
+      <div class="theme-toggle-row">
+        <span id="theme-label">Dark Mode</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="theme-toggle" onchange="toggleTheme()" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Dark Alert Style and Script -->
@@ -647,7 +1485,27 @@ function login() {
 
   localStorage.setItem("warpxUser", email);
   document.getElementById("login-section").style.display = "none";
-  document.getElementById("main-app").style.display = "block";
+
+  // Show cinematic splash screen
+  const splash = document.getElementById("splash-screen");
+  splash.style.display = "flex";
+
+  setTimeout(() => {
+    splash.style.transition = "opacity 0.5s ease";
+    splash.style.opacity = "0";
+    setTimeout(() => {
+      splash.style.display = "none";
+      splash.style.opacity = "1";
+      const mainApp = document.getElementById("main-app");
+      mainApp.style.display = "block";
+      mainApp.classList.add("main-app-enter");
+      initParticles();
+      renderRecentlyPlayed();
+      applyTrendingBadges();
+      startPlayTimer();
+      loadAvatar();
+    }, 500);
+  }, 2500);
 }
 
 // --- FAVORITES FUNCTIONALITY ---
@@ -708,31 +1566,350 @@ function showFavorites() {
   msg.textContent = anyFavorite ? '' : 'You have not added any games.';
 }
 
-function showCategory() {
+function showCategory(cat) {
   document.querySelectorAll('.game-list').forEach(list => {
     list.style.display = '';
     list.querySelectorAll('.game-card').forEach(card => {
       card.style.display = '';
     });
   });
+  document.querySelectorAll('.main-content h2').forEach(h => h.style.display = '');
   let msg = document.getElementById('no-favorites-msg');
   if (msg) msg.textContent = '';
+
+  if (!cat || cat === 'all') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  // Try ID-based scroll (new categories)
+  const el = document.getElementById('cat-' + cat);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  // Fallback: text-based scroll for original categories
+  const textMap = {
+    'featured': 'Featured', 'action': 'Shooting', 'racing': 'Car Games',
+    'flight': 'Flight', 'blocks': 'Blocks'
+  };
+  const searchText = textMap[cat];
+  if (searchText) {
+    const headings = document.querySelectorAll('#main-content h2');
+    for (const h of headings) {
+      if (h.textContent.includes(searchText)) {
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
+  }
 }
 
 function openGame(url) {
+  // Track recently played
+  const card = event ? event.currentTarget : null;
+  if (card) {
+    const name = card.querySelector('p') ? card.querySelector('p').textContent : '';
+    const img = card.querySelector('img') ? card.querySelector('img').src : '';
+    const starEl = card.querySelector('.favorite-star');
+    const gameId = starEl ? starEl.getAttribute('data-gameid') : '';
+    let recent = JSON.parse(localStorage.getItem('warpxRecent') || '[]');
+    recent = recent.filter(g => g.url !== url);
+    recent.unshift({ url, name, img, gameId });
+    if (recent.length > 10) recent = recent.slice(0, 10);
+    localStorage.setItem('warpxRecent', JSON.stringify(recent));
+    renderRecentlyPlayed();
+  }
   window.open(url, '_blank');
 }
 
 function logout() {
   localStorage.removeItem("warpxUser");
+  stopPlayTimer();
   document.getElementById("main-app").style.display = "none";
   document.getElementById("login-section").style.display = "flex";
 }
 function joinDiscord() {
   window.open("https://discord.gg/7a4ShS6wqb", "_blank");
 }
+
+// === SETTINGS ===
+function openSettings() {
+  const email = localStorage.getItem('warpxUser') || '';
+  document.getElementById('settings-email').value = email;
+  document.getElementById('settings-password').value = '';
+  document.getElementById('settings-overlay').style.display = 'flex';
+}
+function closeSettings() {
+  document.getElementById('settings-overlay').style.display = 'none';
+}
+function saveAccountSettings() {
+  const newEmail = document.getElementById('settings-email').value.trim();
+  const newPass = document.getElementById('settings-password').value;
+  if (newEmail && newEmail.includes('@') && newEmail.includes('.')) {
+    localStorage.setItem('warpxUser', newEmail);
+  }
+  if (newPass && newPass.length >= 4) {
+    localStorage.setItem('warpxPass', newPass);
+  }
+  showAlert('Settings saved successfully!');
+  closeSettings();
+}
+function toggleTheme() {
+  const isLight = document.getElementById('theme-toggle').checked;
+  document.body.classList.toggle('light-mode', isLight);
+  localStorage.setItem('warpxTheme', isLight ? 'light' : 'dark');
+  document.getElementById('theme-label').textContent = isLight ? 'Light Mode' : 'Dark Mode';
+}
+// Restore theme on load
+(function() {
+  const saved = localStorage.getItem('warpxTheme');
+  if (saved === 'light') {
+    document.body.classList.add('light-mode');
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (toggle) { toggle.checked = true; }
+      const label = document.getElementById('theme-label');
+      if (label) { label.textContent = 'Light Mode'; }
+    });
+  }
+})();
+// Close settings on overlay click
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'settings-overlay') closeSettings();
+  if (e.target.id === 'avatar-overlay') closeAvatarPicker();
+});
+
+// === AVATAR SYSTEM ===
+const avatarList = ['🎮','👾','🤖','👽','🐉','🦊','🐺','🎭','🧙','⚡','🔥','💀','🦅','🐱‍👤','🎯','🌟'];
+let selectedAvatar = null;
+
+function loadAvatar() {
+  const saved = localStorage.getItem('warpxAvatar') || '🎮';
+  const email = localStorage.getItem('warpxUser') || 'Player';
+  const username = email.split('@')[0];
+  const avatarEl = document.getElementById('sidebar-avatar');
+  const nameEl = document.getElementById('sidebar-username');
+  if (avatarEl) {
+    // Use emoji as image via SVG data URI
+    avatarEl.src = emojiToSvg(saved);
+    avatarEl.alt = saved;
+  }
+  if (nameEl) nameEl.textContent = username;
+}
+
+function emojiToSvg(emoji) {
+  return 'data:image/svg+xml,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="50" fill="#1a1a2e"/><text x="50" y="68" font-size="55" text-anchor="middle">' + emoji + '</text></svg>'
+  );
+}
+
+function openAvatarPicker() {
+  const grid = document.getElementById('avatar-grid');
+  const current = localStorage.getItem('warpxAvatar') || '🎮';
+  selectedAvatar = current;
+  grid.innerHTML = '';
+  avatarList.forEach(emoji => {
+    const opt = document.createElement('div');
+    opt.className = 'avatar-option' + (emoji === current ? ' selected' : '');
+    opt.textContent = emoji;
+    opt.onclick = function() {
+      grid.querySelectorAll('.avatar-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedAvatar = emoji;
+    };
+    grid.appendChild(opt);
+  });
+  document.getElementById('avatar-overlay').style.display = 'flex';
+}
+
+function closeAvatarPicker() {
+  document.getElementById('avatar-overlay').style.display = 'none';
+}
+
+function saveAvatar() {
+  if (selectedAvatar) {
+    localStorage.setItem('warpxAvatar', selectedAvatar);
+    loadAvatar();
+  }
+  closeAvatarPicker();
+  showAlert('Avatar updated!');
+}
+
+// === SEARCH GAMES ===
+function searchGames() {
+  const query = document.getElementById('game-search').value.toLowerCase().trim();
+  const allCards = document.querySelectorAll('#main-content .game-card');
+  const allHeadings = document.querySelectorAll('#main-content h2');
+  const allLists = document.querySelectorAll('#main-content .game-list');
+  let noRes = document.getElementById('search-no-results');
+  if (!noRes) {
+    noRes = document.createElement('div');
+    noRes.id = 'search-no-results';
+    noRes.className = 'search-no-results';
+    noRes.textContent = 'No games found.';
+    document.getElementById('main-content').appendChild(noRes);
+  }
+  if (!query) {
+    allCards.forEach(c => c.style.display = '');
+    allHeadings.forEach(h => h.style.display = '');
+    allLists.forEach(l => l.style.display = '');
+    noRes.style.display = 'none';
+    return;
+  }
+  let found = false;
+  allCards.forEach(c => {
+    const name = c.querySelector('p') ? c.querySelector('p').textContent.toLowerCase() : '';
+    if (name.includes(query)) { c.style.display = ''; found = true; }
+    else { c.style.display = 'none'; }
+  });
+  // Hide empty sections
+  allLists.forEach(list => {
+    const visible = list.querySelectorAll('.game-card[style=""], .game-card:not([style])');
+    const hasVisible = Array.from(list.querySelectorAll('.game-card')).some(c => c.style.display !== 'none');
+    list.style.display = hasVisible ? '' : 'none';
+    const prev = list.previousElementSibling;
+    if (prev && prev.tagName === 'H2') prev.style.display = hasVisible ? '' : 'none';
+  });
+  noRes.style.display = found ? 'none' : 'block';
+}
+
+// === RECENTLY PLAYED ===
+function renderRecentlyPlayed() {
+  const recent = JSON.parse(localStorage.getItem('warpxRecent') || '[]');
+  const section = document.getElementById('recently-played-section');
+  const list = document.getElementById('recently-played-list');
+  if (!section || !list) return;
+  if (recent.length === 0) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  list.innerHTML = '';
+  recent.forEach(g => {
+    const card = document.createElement('div');
+    card.className = 'game-card';
+    card.onclick = function() { openGame(g.url); };
+    card.innerHTML = `<span class="favorite-star" data-gameid="${g.gameId}" onclick="event.stopPropagation(); toggleFavorite(this, '${g.gameId}')">★</span><img src="${g.img}" alt="${g.name}" /><p>${g.name}</p>`;
+    list.appendChild(card);
+  });
+  updateFavoriteStars();
+}
+
+// === TRENDING & POPULAR BADGES ===
+function applyTrendingBadges() {
+  const trending = ['roblox','fortnite','minecraft','krunker','survivio','agario','slitherio','slope'];
+  const popular = ['shellshock','deadshot','1v1lol','geodash','retrobowl','zombsroyale','chess','run3','skribblio','subwaysurfers'];
+  document.querySelectorAll('.favorite-star').forEach(star => {
+    const id = star.getAttribute('data-gameid');
+    const card = star.parentElement;
+    if (!card || card.querySelector('.trending-badge, .popular-badge')) return;
+    if (trending.includes(id)) {
+      const badge = document.createElement('span');
+      badge.className = 'trending-badge';
+      badge.textContent = '🔥 TRENDING';
+      card.appendChild(badge);
+    } else if (popular.includes(id)) {
+      const badge = document.createElement('span');
+      badge.className = 'popular-badge';
+      badge.textContent = '⭐ POPULAR';
+      card.appendChild(badge);
+    }
+  });
+}
+
+// === PLAY TIMER ===
+let playTimerInterval = null;
+let playTimerStart = null;
+function startPlayTimer() {
+  playTimerStart = Date.now();
+  const el = document.getElementById('play-timer');
+  if (el) el.style.display = 'block';
+  playTimerInterval = setInterval(updatePlayTimer, 1000);
+}
+function stopPlayTimer() {
+  if (playTimerInterval) clearInterval(playTimerInterval);
+  playTimerInterval = null;
+  const el = document.getElementById('play-timer');
+  if (el) el.style.display = 'none';
+}
+function updatePlayTimer() {
+  if (!playTimerStart) return;
+  const elapsed = Math.floor((Date.now() - playTimerStart) / 1000);
+  const hrs = Math.floor(elapsed / 3600);
+  const mins = Math.floor((elapsed % 3600) / 60);
+  const secs = elapsed % 60;
+  const pad = n => n.toString().padStart(2, '0');
+  const display = hrs > 0 ? `${pad(hrs)}:${pad(mins)}:${pad(secs)}` : `${pad(mins)}:${pad(secs)}`;
+  const val = document.getElementById('play-timer-value');
+  if (val) val.textContent = display;
+  // Update total tracked time
+  let total = parseInt(localStorage.getItem('warpxTotalTime') || '0');
+  localStorage.setItem('warpxTotalTime', (total + 1).toString());
+}
+
+// === PARTICLE BACKGROUND SYSTEM ===
+function initParticles() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  const count = 100;
+  const colors = [[128,0,255],[255,0,128],[0,255,255]];
+
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r: Math.random() * 2.5 + 0.5,
+      alpha: Math.random() * 0.5 + 0.1,
+      color: colors[Math.floor(Math.random() * 3)]
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color[0]}, ${p.color[1]}, ${p.color[2]}, ${p.alpha})`;
+      ctx.fill();
+    }
+    // Draw faint connecting lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(128, 0, 255, ${0.1 * (1 - dist / 150)})`;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
 </script>
 
 </body>
 </html>
-
